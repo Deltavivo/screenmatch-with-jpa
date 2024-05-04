@@ -13,9 +13,16 @@ public class ConsultarChatGPT {
                 .maxTokens(1000)
                 .temperature(0.7)
                 .build();
+        try {
+            var resposta = service.createCompletion(requisicao);
+            return resposta.getChoices().get(0).getText();
 
-        var resposta = service.createCompletion(requisicao);
-        return resposta.getChoices().get(0).getText();
+        } catch (Exception e) {
+            System.out.printf("Falha durante conversao da sinopse.");
+            System.out.printf(e.getMessage());
+            return texto;
+        }
+
     }
 }
 

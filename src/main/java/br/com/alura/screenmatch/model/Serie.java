@@ -97,7 +97,6 @@ public class Serie{
     }
 
     public List<Episodio> getEpisodios(){
-        episodios.forEach(e -> e.setSerie(this));
         return episodios;
     }
 
@@ -127,6 +126,7 @@ public class Serie{
     }
 
     public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
         this.episodios = episodios;
     }
 }
