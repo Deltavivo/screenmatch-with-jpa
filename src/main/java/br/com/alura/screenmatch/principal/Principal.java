@@ -44,6 +44,7 @@ public class Principal {
                     9 - Buscar series por qtd de temporada e avaliacao
                     10 - Buscar episodio por trecho
                     11 - Buscar top episodios por serie
+                    12 - Buscar episodios a partir de uma data
                     0 - Sair
                     """;
 
@@ -83,6 +84,9 @@ public class Principal {
                     break;
                 case 11:
                     buscarTopEpisodioPorSerie();
+                    break;
+                case 12:
+                    buscarEpisodiosAPartirDeUmaData();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -251,6 +255,19 @@ public class Principal {
                     System.out.printf("Serie: %s Temporada %s - Episodio %s - %s Avaliacao %s\n",
                             e.getSerie().getTitulo(), e.getTemporada(),
                             e.getNumeroEpisodio(), e.getTitulo(), e.getAvaliacao()));
+        }
+    }
+
+    private void buscarEpisodiosAPartirDeUmaData(){
+        buscarSeriePorTitulo();
+        if(serieBusca.isPresent()){
+            Serie serie = serieBusca.get();
+            System.out.printf("Digite o ano limite de lancamento: ");
+            var anoLancamento = leitura.nextInt();
+            leitura.nextLine();
+
+            List<Episodio> episodioAno = repository.episodiosPorSerieEAno(serie, anoLancamento);
+            episodioAno.forEach(System.out::println);
         }
     }
 }
